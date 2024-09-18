@@ -3,7 +3,12 @@
 import {ReactNode, useMemo} from "react";
 import {ConnectionProvider} from "@solana/wallet-adapter-react";
 import {NETWORK} from "@/config/site";
-import {PhantomWalletAdapter} from "@solana/wallet-adapter-wallets";
+import {
+    CoinbaseWalletAdapter, NightlyWalletAdapter,
+    PhantomWalletAdapter,
+    SolflareWalletAdapter,
+    UnsafeBurnerWalletAdapter, WalletConnectWalletAdapter
+} from "@solana/wallet-adapter-wallets";
 import dynamic from "next/dynamic";
 import { Toaster } from "react-hot-toast";
 import {ThemeProvider} from "next-themes";
@@ -21,7 +26,8 @@ const ReactUIWalletModalProviderDynamic = dynamic(
 );
 
 export default function RootProvider({ children }: RootProviderProps) {
-    const wallets = useMemo(() => [new PhantomWalletAdapter()], []);
+    const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter(), new UnsafeBurnerWalletAdapter(), new CoinbaseWalletAdapter(),
+    new NightlyWalletAdapter()], []);
     return (
         <>
             <ThemeProvider
@@ -61,7 +67,7 @@ export default function RootProvider({ children }: RootProviderProps) {
                     "sunset",
                 ]
             }
-                defaultTheme="dark"
+                defaultTheme="synthwave"
                 enableSystem
                 attribute = 'data-theme'
             >

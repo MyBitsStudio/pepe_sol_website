@@ -1,6 +1,6 @@
 "use client"
 
-import {SetStateAction, useEffect, useState} from "react";
+import {useState} from "react";
 import {createJupiterApiClient, QuoteResponse, SwapResponse} from "@jup-ag/api";
 import {NETWORK, SOL_ADDRESS} from "@/config/site";
 import {Connection, LAMPORTS_PER_SOL, PublicKey, VersionedTransaction} from "@solana/web3.js";
@@ -8,10 +8,8 @@ import {useWallet} from "@solana/wallet-adapter-react";
 import {toast} from "react-toastify";
 import {WalletMultiButton} from "@solana/wallet-adapter-react-ui";
 import {Simulate} from "react-dom/test-utils";
-import change = Simulate.change;
 import {HashLoader, ScaleLoader} from "react-spinners";
-import {getSignature} from "@/utils/signature";
-import {Wallet} from "@project-serum/anchor";
+import {useMediaQuery} from "usehooks-ts";
 
 
 const connection = new Connection(NETWORK, 'confirmed');
@@ -225,29 +223,43 @@ export default function Terminal() {
 
         })
     }
+    function useIsMobile() {
+        return useMediaQuery('(max-width: 1000px)')
+    }
+
 
     return (
 
         <div className={"container flex justify-self-center lg:mx-96"}>
         <section>
-            <div className="lg:grid lg:grid-cols-12">
-                <section className="flex bg-gray-900 lg:col-span-5">
+            <div className="lg:grid lg:grid-cols-2 lg:mx-12">
+                <section className="flex mx-4">
 
-                    <div id="dexscreener-embed">
-                        <iframe width={500} height={700}
-                            src="https://dexscreener.com/solana/AD3P6ezuLMP9heghbL7B9UkdLBhu2ZycTgaNB9XVpump?embed=1&theme=dark&info=0"></iframe>
-                    </div>
+                    {useIsMobile() ? (
+                        <div id="dexscreener-embed">
+                            <iframe height={500} width={420}
+                                    src="https://dexscreener.com/solana/AD3P6ezuLMP9heghbL7B9UkdLBhu2ZycTgaNB9XVpump?embed=1&theme=dark&info=0"></iframe>
+                        </div>
+                    ) : (
+                        <div id="dexscreener-embed">
+                            <iframe height={600} width={600}
+                                    src="https://dexscreener.com/solana/AD3P6ezuLMP9heghbL7B9UkdLBhu2ZycTgaNB9XVpump?embed=1&theme=dark&info=0"></iframe>
+                        </div>
+                    )}
+
 
                 </section>
 
-                {connected ? (
-                    <main
-                        className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
-                    >
-                        <div className="max-w-xl lg:max-w-3xl">
-                            <h2 className="mt-6 text-2xl font-bold text-purple-700 sm:text-3xl md:text-4xl">
-                            💎Buy PEPE on SOL💎
-                            </h2>
+                <div className="max-w-xl lg:max-w-3xl">
+                    <h2 className="mt-6 mx-20 text-2xl font-bold text-purple-700 sm:text-3xl md:text-4xl">
+                        💎Buy PEPE on SOL💎
+                    </h2>
+                    <br />
+                    {connected ? (
+                        <main
+                            className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+                        >
+
 
                             <br/>
 
@@ -284,7 +296,7 @@ export default function Terminal() {
                                     </form>
                                 </div>
 
-                                <br />
+                                <br/>
 
                                 <div className={"flex justify-center"}>
 
@@ -302,17 +314,18 @@ export default function Terminal() {
                                 <ul className="mt-4 space-y-2">
                                     <li>
                                         <div
-                                           className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
-                                            <strong className="flex justify-center font-medium text-white">Swap Information</strong>
+                                            className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
+                                            <strong className="flex justify-center font-medium text-white">Swap
+                                                Information</strong>
                                             <br/>
 
                                             <p className="mt-1 text-xs font-medium text-gray-300">
                                                 {loading ? (
-                                                    <HashLoader />
-                                                    ) : (
+                                                    <HashLoader/>
+                                                ) : (
                                                     <>
                                                         {quoting ? (
-                                                            <ScaleLoader />
+                                                            <ScaleLoader/>
                                                         ) : (
                                                             <>
 
@@ -363,9 +376,12 @@ export default function Terminal() {
                                                                                     className="text-xs font-medium"> {impact} % </span>
                                                                                 </div>
                                                                             </li>
-                                                                            <br />
+                                                                            <br/>
                                                                             <li className={"flex justify-center "}>
-                                                                                <button onClick={purchase} className={"inline-block shrink-0 rounded-md border border-purple-700 bg-purple-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"}> Swap Now</button>
+                                                                                <button onClick={purchase}
+                                                                                        className={"inline-block shrink-0 rounded-md border border-purple-700 bg-purple-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"}> Swap
+                                                                                    Now
+                                                                                </button>
                                                                             </li>
                                                                         </ul>
 
@@ -375,7 +391,8 @@ export default function Terminal() {
                                                                 ) : (
 
                                                                     <div className={"flex justify-center"}>
-                                                                        <div className="inline-flex gap-2 self-end rounded bg-green-100 p-1 text-green-600">
+                                                                        <div
+                                                                            className="inline-flex gap-2 self-end rounded bg-green-100 p-1 text-green-600">
                                                                             <span className="text-xs font-medium"> Ready to Quote !</span>
                                                                         </div>
                                                                     </div>
@@ -391,27 +408,26 @@ export default function Terminal() {
                                     </li>
 
                                     <li>
-                                    <a target="_blank"
-                                       rel="noreferrer" href="https://www.hatswap.app"
+                                        <a target="_blank"
+                                           rel="noreferrer" href="https://www.hatswap.app"
                                            className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
-                                            <strong className="flex justify-center font-medium text-white">Powered by HatSwap</strong>
+                                            <strong className="flex justify-center font-medium text-white">Powered by
+                                                HatSwap</strong>
                                         </a>
                                     </li>
                                 </ul>
                             </article>
+                        </main>
 
 
+
+                        ) : (
+                        <div className="flex rounded border border-purple-700 bg-gray-800 p-2 items-center justify-center">
+                            <WalletMultiButton className={"btn btn-outline btn-secondary"}/>
                         </div>
-                    </main>
-                ) : (
-                    <div className="max-w-xl lg:max-w-3xl">
-                        <article className="rounded-xl border border-gray-700 bg-gray-800 p-4">
-                            <WalletMultiButton/>
-                        </article>
-                    </div>
-                )}
-
-            </div>
+                        )}
+                </div>
+                </div>
         </section>
         </div>
 

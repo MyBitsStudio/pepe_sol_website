@@ -32,7 +32,7 @@ export const QUICK = "https://neat-magical-butterfly.solana-mainnet.quiknode.pro
 export const NETWORK = QUICK;
 
 export const LINKS = [
-    "#", //telegram
+    "https://t.me/PEPEONPUMPFUN11", //telegram
     "#", //X
     "#", //dexscreener
 ]
