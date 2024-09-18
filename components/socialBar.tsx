@@ -30,7 +30,7 @@ export default function SocialBar() {
                         </span>
                     </a>
 
-                    <a href={""} className={"mx-2"}>
+                    <a href={LINKS[2]} className={"mx-2"}>
                         <img src={"/dex.png"} alt="as" width={36} height={36}/>
                     </a>
 
