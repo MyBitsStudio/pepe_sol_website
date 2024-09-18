@@ -31,7 +31,6 @@ export default function RoadMap(){
                         }}>
                             <span className="hidden sm:inline"> Development </span>
                         </button>
-                        <img src={"sol.gif"} alt={"PEPE"} width={"36"} height={"36"}/>
                     </li>
 
                     <li className="flex items-center sm:gap-1.5">
@@ -39,6 +38,7 @@ export default function RoadMap(){
                             handleSectionClick('com')
                         }}>
                             <span className="hidden sm:inline"> Community </span>
+                            <img src={"sol.gif"} alt={"PEPE"} width={"36"} height={"36"}/>
                         </button>
                     </li>
 
@@ -96,17 +96,43 @@ export default function RoadMap(){
 
                         <div id={"com"} className={`mb-8 ${section === 'com' ? 'block' : 'hidden'}`}>
                             <h3 className="mx-52 text-lg font-medium text-purple-500">Community</h3>
-                            <p className='text-purple-700'>section.</p>
+                            <ul className="mt-4 space-y-2">
+                                <li>
+                                    <div
+                                        className="block h-full rounded-lg border border-purple-700 p-4">
+                                        <strong className="font-medium text-purple-700">Community Growth</strong>
+
+                                        <p className="mt-1 text-xs font-medium text-purple-400">
+                                            Telegram Channel 500 Organic <br/>
+                                            X Raiding Completion Rate 90%+ <br/>
+                                            Poll for Utility Development <br/>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        className="block h-full rounded-lg border border-purple-700 p-4">
+                                        <strong className="font-medium text-purple-700">Chart Growth</strong>
+
+                                        <p className="mt-1 text-xs font-medium text-purple-400">
+                                            50k Liquidity <br/>
+                                            250k MC <br/>
+                                            200K Floor <br/>
+                                            Volume $10k+ <br/>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
 
                         <div id={"utl"} className={`mb-8 ${section === 'utl' ? 'block' : 'hidden'}`}>
                             <h3 className="mx-52 text-lg font-medium text-purple-500">Utilities</h3>
-                            <p className='text-purple-700'>section.</p>
+                            <p className='text-purple-700'>Coming after Community Growth Goals complete</p>
                         </div>
 
                         <div id={"gro"} className={`mb-8 ${section === 'gro' ? 'block' : 'hidden'}`}>
-                        <h3 className="mx-52 text-lg font-medium text-purple-500">Growth</h3>
-                            <p className='text-purple-700'>section.</p>
+                            <h3 className="mx-52 text-lg font-medium text-purple-500">Growth</h3>
+                            <p className='text-purple-700'>Coming after Utilities Goals complete</p>
                         </div>
                     </div>
                 </article>
