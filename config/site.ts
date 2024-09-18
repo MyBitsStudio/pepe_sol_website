@@ -33,8 +33,8 @@ export const NETWORK = QUICK;
 
 export const LINKS = [
     "https://t.me/PEPEONPUMPFUN11", //telegram
-    "#", //X
-    "#", //dexscreener
+    "https://x.com/pepeonpumpfun?s=21", //X
+    "https://dexscreener.com/solana/32oszbqqfaafzcg6guobjz9gnpyh2qta7cokrdsxjvsk", //dexscreener
 ]
 
 export const SOL_ADDRESS = "So11111111111111111111111111111111111111112"
