@@ -5,23 +5,23 @@ import Base from "@/app/base";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Solana Template App',
+  title: 'PEPE on SOL',
   description:
-    'Start your Solana journey here, without unnecessary configuration and setup. Just clone it and code on top of it. Powered by Nightly Wallet.',
+    'PEPE on SOL is the king of PEPEs on SOL',
   twitter: {
-    title: 'Solana Template App',
+    title: 'PEPE on SOL',
     description:
-      'Start your Solana journey here, without unnecessary configuration and setup. Just clone it and code on top of it. Powered by Nightly Wallet.',
-    images: 'https://solana-web3-template.nightly.app/preview.png',
+      'PEPE on SOL is the king of PEPEs on SOL',
+    images: '/five.png',
     card: 'summary_large_image',
-    site: '@nightly_app',
+    site: '@PEPEONPUMPFUN',
   },
   openGraph: {
-    title: 'Solana Template App',
+    title: 'PEPE on SOL',
     description:
-      'Start your Solana journey here, without unnecessary configuration and setup. Just clone it and code on top of it. Powered by Nightly Wallet.',
-    images: 'https://solana-web3-template.nightly.app/preview.png',
-    url: 'https://solana-web3-template.nightly.app',
+        'PEPE on SOL is the king of PEPEs on SOL',
+    images: '/five.png',
+    url: 'https://www.pepeonpumpfun.xyz/',
     type: 'website',
   },
 }
