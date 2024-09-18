@@ -26,7 +26,7 @@ const ReactUIWalletModalProviderDynamic = dynamic(
 );
 
 export default function RootProvider({ children }: RootProviderProps) {
-    const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter(), new UnsafeBurnerWalletAdapter(), new CoinbaseWalletAdapter(),
+    const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter(), new CoinbaseWalletAdapter(),
     new NightlyWalletAdapter()], []);
     return (
         <>
