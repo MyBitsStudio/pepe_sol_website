@@ -2,18 +2,28 @@
 
 import {useState} from "react";
 import {createJupiterApiClient, QuoteResponse, SwapResponse} from "@jup-ag/api";
-import {NETWORK, SOL_ADDRESS} from "@/config/site";
-import {Connection, LAMPORTS_PER_SOL, PublicKey, VersionedTransaction} from "@solana/web3.js";
+import {FEE_ACCOUNT, NETWORK, SOL_ADDRESS} from "@/config/site";
+import {
+    Connection, Keypair,
+    LAMPORTS_PER_SOL,
+    PublicKey,
+    VersionedTransaction
+} from "@solana/web3.js";
 import {useWallet} from "@solana/wallet-adapter-react";
 import {toast} from "react-toastify";
 import {WalletMultiButton} from "@solana/wallet-adapter-react-ui";
-import {Simulate} from "react-dom/test-utils";
 import {HashLoader, ScaleLoader} from "react-spinners";
 import {useMediaQuery} from "usehooks-ts";
+import {ReferralProvider} from "@jup-ag/referral-sdk";
+import bs58 from "bs58";
 
 
 const connection = new Connection(NETWORK, 'confirmed');
 const jupiterApi = createJupiterApiClient({basePath: "https://quote-api.jup.ag/v6"});
+const provider = new ReferralProvider(connection);
+const referral = new PublicKey("HnWBoYguFcT2fXS33WkmcwuhegWmJdXiNqeF6HWuMjpk")
+const mint = new PublicKey("AD3P6ezuLMP9heghbL7B9UkdLBhu2ZycTgaNB9XVpump")
+const key = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(FEE_ACCOUNT)))
 
 export default function Terminal() {
 
@@ -54,14 +64,74 @@ export default function Terminal() {
                 minimizeSlippage: true,
                 onlyDirectRoutes: false,
                 asLegacyTransaction: false,
+                platformFeeBps: 100
             }).then(async r => {
                 if (r) {
                     buyQuote = r
 
                     setQuote(Number(r.outAmount))
-                    setFees(Number(r.platformFee))
+                    setFees(Number(r.platformFee?.amount))
                     setMinimum(Number(r.otherAmountThreshold))
                     setImpact(Number(r.priceImpactPct))
+
+                    if(!key){
+                        console.error("No key")
+                        return
+                    }
+
+                    const { tx, referralTokenAccountPubKey } =
+                        await provider.initializeReferralTokenAccount({
+                            payerPubKey: key.publicKey,
+                            referralAccountPubKey: referral,
+                            mint,
+                        });
+
+                    const referralTokenAccount = await connection.getAccountInfo(
+                        referralTokenAccountPubKey,
+                    );
+
+                    if(referralTokenAccount){
+                        console.log("Referral Token Account", referralTokenAccount)
+                    } else {
+                        console.error("No referral token account")
+                        if (signTransaction) {
+
+                            console.log("Signing transaction")
+
+                            const latestBlockHash = await connection.getLatestBlockhash()
+
+                            if(latestBlockHash){
+
+                                console.log("Latest block hash", latestBlockHash)
+
+                                tx.recentBlockhash = latestBlockHash.blockhash;
+                                tx.feePayer = key.publicKey;
+                                tx.sign(key)
+
+                                const txid =  await connection.sendRawTransaction(tx.serialize(), {
+                                    skipPreflight: true,
+                                })
+
+                                console.log("Txid", txid)
+
+                                if(txid){
+                                     const confirm = await connection.confirmTransaction({
+                                        blockhash: latestBlockHash.blockhash,
+                                        lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+                                        signature: txid
+                                    }, "confirmed")
+
+                                    console.log("Confirm", confirm)
+
+                                    if(confirm) {
+                                        console.log("Confirmed")
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
 
                     await jupiterApi.swapPost({
                         swapRequest: {
@@ -69,6 +139,7 @@ export default function Terminal() {
                             userPublicKey: publicKey?.toBase58() as string,
                             dynamicComputeUnitLimit: true,
                             prioritizationFeeLamports: "auto",
+                            feeAccount: referralTokenAccountPubKey.toBase58(),
                         }
                     }).then(async r => {
                         if (r) {
@@ -195,7 +266,7 @@ export default function Terminal() {
                                 blockhash: latestBlockHash.blockhash,
                                 lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
                                 signature: tx
-                            })
+                            }, "confirmed")
 
                             toast.success((t) => (
                                 <a
