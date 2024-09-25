@@ -1,6 +1,7 @@
 import {LINKS} from "@/config/site";
 import SocialBar from "@/components/socialBar";
 import Carousel from "@/components/carousel";
+import ContractAddress from "@/components/contractAddress";
 
 
 export default function Header(){
@@ -8,6 +9,7 @@ export default function Header(){
     return (
         <section>
             <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+                <div className={"flex justify-center"}><ContractAddress /></div>
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
                     <div className="relative h-96 overflow-hidden rounded-lg lg:order-last lg:h-full lg:my-12">
                         <Carousel />

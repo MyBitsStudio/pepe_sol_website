@@ -34,6 +34,10 @@ export default function SocialBar() {
                         <img src={"/dex.png"} alt="as" width={36} height={36}/>
                     </a>
 
+                    <a href={LINKS[3]} className={"-mx-6"}>
+                        <img src={"/dextools.png"} alt="as" width={84} height={84}/>
+                    </a>
+
                 </div>
             </div>
         </div>

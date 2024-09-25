@@ -38,7 +38,6 @@ export default function RoadMap(){
                             handleSectionClick('com')
                         }}>
                             <span className="hidden sm:inline"> Community </span>
-                            <img src={"sol.gif"} alt={"PEPE"} width={"36"} height={"36"}/>
                         </button>
                     </li>
 
@@ -47,6 +46,7 @@ export default function RoadMap(){
                             handleSectionClick('utl')
                         }}>
                             <span className="hidden sm:inline"> Utilities </span>
+                            <img src={"sol.gif"} alt={"PEPE"} width={"36"} height={"36"}/>
                         </button>
                     </li>
 
@@ -99,26 +99,26 @@ export default function RoadMap(){
                             <ul className="mt-4 space-y-2">
                                 <li>
                                     <div
-                                        className="block h-full rounded-lg border border-purple-700 p-4">
-                                        <strong className="font-medium text-purple-700">Community Growth</strong>
+                                        className="block h-full rounded-lg border border-green-500 p-4">
+                                        <strong className="font-medium text-green-500">Community Growth</strong>
 
                                         <p className="mt-1 text-xs font-medium text-purple-400">
-                                            Telegram Channel 500 Organic <br/>
-                                            X Raiding Completion Rate 90%+ <br/>
-                                            Poll for Utility Development <br/>
+                                            Telegram Channel 450 Organic ✅<br/>
+                                            X Raiding Completion Rate 80%+ ✅ <br/>
+                                            Poll for Utility Development ✅<br/>
                                         </p>
                                     </div>
                                 </li>
                                 <li>
                                     <div
-                                        className="block h-full rounded-lg border border-purple-700 p-4">
-                                        <strong className="font-medium text-purple-700">Chart Growth</strong>
+                                        className="block h-full rounded-lg border border-green-500 p-4">
+                                        <strong className="font-medium text-green-500">Chart Growth</strong>
 
                                         <p className="mt-1 text-xs font-medium text-purple-400">
-                                            50k Liquidity <br/>
-                                            250k MC <br/>
-                                            200K Floor <br/>
-                                            Volume $10k+ <br/>
+                                            30k Liquidity ✅<br/>
+                                            100k MC ✅<br/>
+                                            80K Floor ✅<br/>
+                                            Volume $10k+ ✅<br/>
                                         </p>
                                     </div>
                                 </li>
@@ -127,12 +127,43 @@ export default function RoadMap(){
 
                         <div id={"utl"} className={`mb-8 ${section === 'utl' ? 'block' : 'hidden'}`}>
                             <h3 className="mx-52 text-lg font-medium text-purple-500">Utilities</h3>
-                            <p className='text-purple-700'>Coming after Community Growth Goals complete</p>
+                            <ul className="mt-4 space-y-2">
+                                <li>
+                                    <div
+                                        className="block h-full rounded-lg border border-purple-700 p-4">
+                                        <strong className="font-medium text-purple-700">Utility Development</strong>
+
+                                        <p className="mt-1 text-xs font-medium text-purple-400">
+                                            AI Image Generator <br/>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
 
                         <div id={"gro"} className={`mb-8 ${section === 'gro' ? 'block' : 'hidden'}`}>
                             <h3 className="mx-52 text-lg font-medium text-purple-500">Growth</h3>
-                            <p className='text-purple-700'>Coming after Utilities Goals complete</p>
+                            <ul className="mt-4 space-y-2">
+                                <li>
+                                    <div
+                                        className="block h-full rounded-lg border border-purple-700 p-4">
+                                        <strong className="font-medium text-purple-700">DEX Growth</strong>
+
+                                        <p className="mt-1 text-xs font-medium text-purple-400">
+                                            Apply to DexTools (100k MC) ✅<br/>
+                                            Apply to CMC (200k) <br/>
+                                            Apply to MEXC (1m) <br/>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        className="block h-full rounded-lg border border-purple-700 p-4">
+                                        <strong className="font-medium text-purple-700">MORE TO COME</strong>
+
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </article>
